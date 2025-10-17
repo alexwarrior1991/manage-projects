@@ -1,0 +1,45 @@
+version: "3.8"
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: manage-postgres
+    environment:
+      - POSTGRES_DB=${DB_NAME:-manageprojects}
+      - POSTGRES_USER=${DB_USER:-manage}
+      - POSTGRES_PASSWORD=${DB_PASSWORD:-manage}
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - manage-net
+
+  redis:
+    image: redis:7-alpine
+    container_name: manage-redis
+    command: ["redis-server", "--appendonly", "yes"]
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - redisdata:/data
+    networks:
+      - manage-net
+
+volumes:
+  pgdata:
+  redisdata:
+
+networks:
+  manage-net:
+    driver: bridge
