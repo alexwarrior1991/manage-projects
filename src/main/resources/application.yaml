@@ -1,0 +1,55 @@
+spring:
+  application:
+    name: manage-projects
+
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:default}
+
+  # Cache (Redis)
+  cache:
+    type: redis
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      timeout: 3000
+      repositories:
+        enabled: false
+
+  # PostgreSQL datasource
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:manageprojects}
+    username: ${DB_USER:manage}
+    password: ${DB_PASSWORD:manage}
+    hikari:
+      maximum-pool-size: ${DB_MAX_POOL:10}
+      minimum-idle: ${DB_MIN_IDLE:2}
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+        jdbc:
+          lob:
+            non_contextual_creation: true
+    show-sql: false
+
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+
+server:
+  port: ${SERVER_PORT:8080}
+
+logging:
+  level:
+    org.hibernate.SQL: info
+    org.springframework.data.redis: info
+    com.alejandro.manageprojects: info
