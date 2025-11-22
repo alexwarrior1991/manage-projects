@@ -2,6 +2,7 @@ package com.alejandro.manageprojects.domain.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.envers.Audited;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -13,6 +14,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Audited
 public class Rol {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

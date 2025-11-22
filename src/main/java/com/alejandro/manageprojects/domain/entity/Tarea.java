@@ -2,6 +2,7 @@ package com.alejandro.manageprojects.domain.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.envers.Audited;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -14,6 +15,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Audited
 public class Tarea {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

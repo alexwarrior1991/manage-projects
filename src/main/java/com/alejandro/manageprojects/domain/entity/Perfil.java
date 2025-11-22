@@ -2,6 +2,7 @@ package com.alejandro.manageprojects.domain.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.envers.Audited;
 
 @Entity
 @Table(name = "perfiles")
@@ -10,6 +11,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Audited
 public class Perfil {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

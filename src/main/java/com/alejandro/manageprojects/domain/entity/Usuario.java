@@ -2,6 +2,7 @@ package com.alejandro.manageprojects.domain.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.envers.Audited;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -12,6 +13,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Audited
 @Entity
 @Table(name = "usuarios")
 public class Usuario {
