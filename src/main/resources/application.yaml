@@ -50,6 +50,10 @@ server:
 
 logging:
   level:
+    # DDL (creación/alteración de tablas, índices, etc.)
+    org.hibernate.tool.schema: debug
+    org.hibernate.tool.schema.internal: debug
+    org.hibernate.tool.schema.internal.exec: debug
     org.hibernate.SQL: info
     org.springframework.data.redis: info
     com.alejandro.manageprojects: info
